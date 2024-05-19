@@ -8,11 +8,11 @@ function updateDateTime() {
 function updateCurrentMinuteLineAndTime() {
   const currentHour = dayjs().hour();
   const currentMinute = dayjs().minute();
+  // Use percentage to determine line location
   const minutePercent = (currentMinute / 60) * 100;
 
   const currentHourBlock = document.getElementById(`hour-${currentHour}`);
   let currentMinuteLine = currentHourBlock.querySelector('.current-minute-line');
-  let currentTimeText = currentHourBlock.querySelector('.current-time-text');
 
   if (!currentMinuteLine) {
       currentMinuteLine = document.createElement('div');
@@ -36,13 +36,14 @@ function updateCurrentMinuteLineAndTime() {
 function generateTimeBlocks() {
   const container = document.getElementById('timeBlocksContainer');
   const currentHour = dayjs().hour();
+  // anchor is 2 hours behind current hour so the current hour is centered
   const anchorHour = (currentHour - 2 + 24) % 24;
 
   for (let hour = 0; hour < 24; hour++) {
       const timeBlock = document.createElement('div');
       timeBlock.id = `hour-${hour}`;
       timeBlock.className = 'row time-block';
-
+      // Define past, present and future blocks
       if (hour < currentHour) {
           timeBlock.classList.add('past');
       } else if (hour === currentHour) {
@@ -50,7 +51,7 @@ function generateTimeBlocks() {
       } else {
           timeBlock.classList.add('future');
       }
-
+      // Define the location of the anchor link
       if (hour === anchorHour) {
           timeBlock.id = 'anchorHour';
       }
@@ -61,10 +62,12 @@ function generateTimeBlocks() {
       timeLabel.textContent = hourLabel;
 
       const textArea = document.createElement('textarea');
+      // Stylize textArea with bootstrap
       textArea.className = 'col-8 col-md-10 description';
       textArea.rows = 3;
       textArea.value = localStorage.getItem(`hour-${hour}`) || '';
 
+      // Stylize saveButton with boostap
       const saveButton = document.createElement('button');
       saveButton.className = 'btn saveBtn col-2 col-md-1';
       saveButton.setAttribute('aria-label', 'save');
