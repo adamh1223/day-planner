@@ -51,7 +51,7 @@ Built with:
 
 
 ## Link to Application
-https://adamh1223.github.io/module-3-challenge/
+https://adamh1223.github.io/day-planner/
 
 ## Link to GitHub Repository
 https://github.com/adamh1223/day-planner
