@@ -56,4 +56,4 @@ https://adamh1223.github.io/module-3-challenge/
 ## Link to GitHub Repository
 https://github.com/adamh1223/module-3-challenge
 
-### <p align="center">[Back to Top](#password-generator)</p> 
+### <p align="center">[Back to Top](#day-planner)</p> 
