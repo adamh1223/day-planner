@@ -73,7 +73,7 @@ textarea {
 .current-minute-line {
   position: absolute;
   left: 0;
-  width: 100%;
+  width: 95%;
   height: 1px;
   background-color: black;
   /* added z-index -1 so that the line only displays over textare */
