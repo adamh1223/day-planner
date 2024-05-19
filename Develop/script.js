@@ -4,24 +4,55 @@ function updateDateTime() {
   document.getElementById('currentDateTime').textContent = now;
 }
 
+// Function to update the current minute line position and display the current time
+function updateCurrentMinuteLineAndTime() {
+  const currentHour = dayjs().hour();
+  const currentMinute = dayjs().minute();
+  const minutePercent = (currentMinute / 60) * 100;
+
+  const currentHourBlock = document.getElementById(`hour-${currentHour}`);
+  let currentMinuteLine = currentHourBlock.querySelector('.current-minute-line');
+  let currentTimeText = currentHourBlock.querySelector('.current-time-text');
+
+  if (!currentMinuteLine) {
+      currentMinuteLine = document.createElement('div');
+      currentMinuteLine.className = 'current-minute-line';
+      currentHourBlock.appendChild(currentMinuteLine);
+  }
+
+  if (!currentTimeText) {
+      currentTimeText = document.createElement('div');
+      currentTimeText.className = 'current-time-text';
+      currentHourBlock.appendChild(currentTimeText);
+  }
+
+  currentMinuteLine.style.top = `${minutePercent}%`;
+
+  const currentTime = dayjs().minute(0).add(currentMinute, 'minute').format('h:mm A');
+  currentTimeText.textContent = currentTime;
+}
+
 // Function to generate time blocks for each hour of the 24-hour day
 function generateTimeBlocks() {
   const container = document.getElementById('timeBlocksContainer');
   const currentHour = dayjs().hour();
+  const anchorHour = (currentHour - 2 + 24) % 24;
 
   for (let hour = 0; hour < 24; hour++) {
       const timeBlock = document.createElement('div');
       timeBlock.id = `hour-${hour}`;
       timeBlock.className = 'row time-block';
-      
+
       if (hour < currentHour) {
           timeBlock.classList.add('past');
       } else if (hour === currentHour) {
           timeBlock.classList.add('present');
-          // Adding an ID to the current hour block for the anchor link
-          timeBlock.id = 'currentHour';
       } else {
           timeBlock.classList.add('future');
+      }
+
+      if (hour === anchorHour) {
+          timeBlock.id = 'anchorHour';
       }
 
       const hourLabel = dayjs().hour(hour).minute(0).format('H:mm');
@@ -50,15 +81,39 @@ function generateTimeBlocks() {
   }
 }
 
-// Initialize the page with current date and time, generate time blocks, and scroll to the current hour
+// Initialize the page with current date and time, generate time blocks, and scroll to the anchor hour
 document.addEventListener('DOMContentLoaded', function() {
   updateDateTime();
   generateTimeBlocks();
+  updateCurrentMinuteLineAndTime();
   setInterval(updateDateTime, 1000);
+  setInterval(updateCurrentMinuteLineAndTime, 60000); // Update the minute line and time every minute
 
-  // Scroll to the current hour block
-  const currentHourElement = document.getElementById('currentHour');
-  if (currentHourElement) {
-      currentHourElement.scrollIntoView({ behavior: 'smooth' });
+  // Scroll to the anchor hour block
+  const anchorHourElement = document.getElementById('anchorHour');
+  if (anchorHourElement) {
+      anchorHourElement.scrollIntoView({ behavior: 'smooth' });
   }
 });
+
+// Function to update the current minute line position and display the current time
+function updateCurrentMinuteLineAndTime() {
+  const currentHour = dayjs().hour();
+  const currentMinute = dayjs().minute();
+  const minutePercent = (currentMinute / 60) * 100;
+
+  const currentHourBlock = document.getElementById(`hour-${currentHour}`);
+  let currentMinuteLine = currentHourBlock.querySelector('.current-minute-line');
+
+  if (!currentMinuteLine) {
+      currentMinuteLine = document.createElement('div');
+      currentMinuteLine.className = 'current-minute-line';
+      currentHourBlock.appendChild(currentMinuteLine);
+  }
+
+  currentMinuteLine.style.top = `${minutePercent}%`; // Position the line according to the current minute
+
+  const currentTime = dayjs().minute(0).add(currentMinute, 'minute').format('h:mm A');
+  currentTimeText.textContent = currentTime;
+  currentTimeText.style.top = `${minutePercent}%`; // Position the time text at the same height as the current minute line
+}
