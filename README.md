@@ -54,6 +54,6 @@ Built with:
 https://adamh1223.github.io/module-3-challenge/
 
 ## Link to GitHub Repository
-https://github.com/adamh1223/module-3-challenge
+https://github.com/adamh1223/day-planner
 
 ### <p align="center">[Back to Top](#day-planner)</p> 
