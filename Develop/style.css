@@ -10,6 +10,7 @@ textarea {
   color: #000000;
   border-left: 1px solid black;
   padding: 10px;
+  z-index: 100;
 }
 
 .description {
@@ -38,6 +39,7 @@ textarea {
 
 .present {
   background-color: #ff6961;
+  z-index: 200;
   color: white;
 }
 
@@ -63,21 +65,7 @@ textarea {
   position: absolute;
   left: 0;
   width: 100%;
-  height: 2px;
+  height: 1px;
   background-color: black;
-  z-index: 10;
-}
-
-.current-time-text {
-  position: absolute;
-    top: 0;
-    left: 0;
-    text-align: left;
-    font-size: 12px;
-    font-weight: 600;
-    padding: 0 0 0 93px;
-    color: lightgray;
-    transform: translateY(-100%); /* Align text vertically at its center */
-    z-index: 15; /* Ensure it's above other elements */
-    background-color: transparent;
+  z-index: -1;
 }

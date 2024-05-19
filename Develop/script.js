@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-// Function to update the current minute line position and display the current time
+// Function to update the current minute line position
 function updateCurrentMinuteLineAndTime() {
   const currentHour = dayjs().hour();
   const currentMinute = dayjs().minute();
@@ -114,6 +114,5 @@ function updateCurrentMinuteLineAndTime() {
   currentMinuteLine.style.top = `${minutePercent}%`; // Position the line according to the current minute
 
   const currentTime = dayjs().minute(0).add(currentMinute, 'minute').format('h:mm A');
-  currentTimeText.textContent = currentTime;
-  currentTimeText.style.top = `${minutePercent}%`; // Position the time text at the same height as the current minute line
+
 }
