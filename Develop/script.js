@@ -90,13 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
   generateTimeBlocks();
   updateCurrentMinuteLineAndTime();
   setInterval(updateDateTime, 1000);
-  setInterval(updateCurrentMinuteLineAndTime, 60000); // Update the minute line and time every minute
-
-  // Scroll to the anchor hour block
-  const anchorHourElement = document.getElementById('anchorHour');
-  if (anchorHourElement) {
-      anchorHourElement.scrollIntoView({ behavior: 'smooth' });
-  }
+  setInterval(updateCurrentMinuteLineAndTime, 10000); // Update the minute line and time every 10 seconds
 });
 
 // Function to update the current minute line position
